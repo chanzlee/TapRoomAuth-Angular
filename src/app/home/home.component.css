@@ -1,0 +1,45 @@
+.running-out {
+    background-color: red;
+}
+
+.alcohol-low {
+    border: 20px solid yellow; 
+}
+
+.alcohol-medium {
+    border: 20px solid darkorange; 
+}
+
+.alcohol-high {
+    border: 20px solid darkgoldenrod;
+}
+
+.price-low {
+    background-color:  #918CAC;
+    color: azure;
+}
+
+.price-medium {
+    background-color:  #676282; 
+    color: azure;
+}
+
+.price-high {
+    background-color:  #3A3748;
+    color: azure;
+}
+
+div {
+    margin-left: 10%;
+    width: 80%;
+    padding: 20px;
+    margin-bottom: 3%;
+}
+
+.sale {
+    color: red;
+}
+
+.hidden{ 
+    display: none;
+}

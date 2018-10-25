@@ -1,0 +1,26 @@
+<p>
+  keg works!
+</p>
+<div *ngIf="isAdding">
+  <label for="name">Name: </label>
+  <input type="text" [(ngModel)] ="name"><br/>
+
+  <label for="brand">Brand: </label>
+  <input type="text" [(ngModel)] ="brand"><br/>
+
+  <label for="price">Price: </label>
+  <input type="text" [(ngModel)] ="price"><br/>
+
+  <label for="alcohol">Alcohol Content: </label>
+  <input type="text" [(ngModel)] ="alcohol"><br/>
+
+  <button class="btn btn-info" (click)="addNew(name,brand,price, alcohol)">Add New Keg</button>
+  
+</div>
+<div *ngIf="!isAdding">
+<button class="btn btn-info" (click)="startAdd()">Add</button>
+</div>
+
+
+
+

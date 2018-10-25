@@ -1,0 +1,70 @@
+
+
+
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+
+  <p *ngIf="authService.isLoggedIn()">
+    Welcome {{ authService.currentUser.name }}
+  </p>
+  <ul>
+    <li *ngIf="authService.isLoggedIn() && authService.currentUser.admin"><a routerLink="/admin">Admin</a></li>
+    <li *ngIf="!authService.isLoggedIn()"><a routerLink="/login">Login</a></li>
+    <li *ngIf="authService.isLoggedIn()"><a (click)="authService.logout()">Logout</a></li>
+  </ul>
+  <h1>
+    {{ title }}
+  </h1>
+  <app-search-keg [childKegList]="kegs" (searchResult) = "searchKeg($event)"></app-search-keg>
+
+
+
+<div class="container-fluid">
+  <p>{{name}}</p>
+  <button class="btn btn-danger" (click)="happyHour()">Happy Hour</button>
+
+
+
+  <div [class]="alcConColor(currentKeg)" *ngFor = "let currentKeg of searchedKegs">
+    <span [class.hidden]="!isSale(currentKeg)" [class.sale]="isSale(currentKeg)">Sale!!!</span>
+    <h3><b>{{currentKeg.name | uppercase}}</b></h3>
+    <p><u><span [class.running-out]="kegVolColor(currentKeg)">Current Keg Level: {{currentKeg.kegVol}}</span></u></p>
+    <p>Brand: {{currentKeg.brand}}<br/>
+    <span [class]="pintColor(currentKeg)">Price: {{currentKeg.price | currency:'USD':code:'1.1-1'}}</span><br/>
+    Alc Content: {{currentKeg.alcohol/100 | percent}}</p>
+    <div *ngIf="authService.isLoggedIn() && authService.currentUser.admin">
+    <button class="btn btn-success" (click) = "sellPint(currentKeg)">Sell A Pint</button>
+    <button class="btn btn-success" (click) = "sellGrowler(currentKeg)">Sell A Growler</button>
+    <button class="btn btn-success" (click) = "sellLargeGrowler(currentKeg)">Sell A Large Growler</button><br/>
+
+    <button class="btn btn-primary" (click) = "editKeg(currentKeg)">Edit</button>
+    <button class="btn btn-primary" (click) = "deleteKeg(currentKeg)">Delete</button><br/>
+    <button class="btn btn-warning" (click) = "throwSale(currentKeg)">Sale</button>
+    
+
+    <div *ngIf="editingKeg">
+      <label for="name">Name: </label>
+      <input type="text" [(ngModel)] ="editingKeg.name"><br/>
+  
+      <label for="brand">Brand: </label>
+      <input type="text" [(ngModel)] ="editingKeg.brand"><br/>
+  
+      <label for="price">Price: </label>
+      <input type="text" [(ngModel)] ="editingKeg.price"><br/>
+  
+      <label for="alcohol">Alcohol Content: </label>
+      <input type="text" [(ngModel)] ="editingKeg.alcohol"><br/>
+      <button class="btn btn-info" (click)="doneEdit()">Done</button>
+    </div>
+    </div>
+  </div>
+
+  <app-keg [isAdding]="isAdding" (create) = "addNewKeg($event)" (finish)="doneAddNewKeg($event)"></app-keg>
+
+  <!-- <button class="btn btn-info" (click)="addNew()">Add New Keg</button> -->
+</div>
+
+
+
+
+
